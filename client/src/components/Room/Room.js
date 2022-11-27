@@ -5,6 +5,7 @@ import UserList from "../UserList/UserList";
 
 export const Room = () => {
   // получаем список пользователей, список сообщений, системную информацию и методы для отправки и удаления сообщения
+
   const { users, messages, log, sendMessage, removeMessage } = useChat();
   // и передаем их соответствующим компонентам
   return (

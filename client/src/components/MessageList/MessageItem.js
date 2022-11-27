@@ -29,18 +29,7 @@ export default function MessageItem({ message, removeMessage }) {
   // определяем элемент для рендеринга на основе типа сообщения
   switch (messageType) {
     case "text":
-      element = (
-        <>
-          <button
-            className="btn"
-            // озвучиваем текст при нажатии кнопки
-            onClick={() => speak({ text: textOrPathToFile, voice })}
-          >
-            <GiSpeaker className="icon speak" />
-          </button>
-          <p>{textOrPathToFile}</p>
-        </>
-      );
+      element = <p>{textOrPathToFile}</p>;
       break;
     case "image":
       element = <img src={pathToFile} alt="" />;
@@ -60,21 +49,20 @@ export default function MessageItem({ message, removeMessage }) {
 
   return (
     <li className={`item message ${isMyMessage ? "my" : ""}`}>
-      <p className="username">{isMyMessage ? "Me" : message.userName}</p>
-
-      <div className="inner">
-        {element}
-
+      <div className="item__top">
+        <p className="username">{isMyMessage ? "Me" : message.userName}</p>
+        <p className="datetime">
+          <TimeAgo date={message.createdAt} />
+        </p>
+      </div>
+      <div className="inner">{element}</div>
+      <div className="df jcfe">
         {isMyMessage && (
-          <button className="btn" onClick={() => removeMessage(message)}>
+          <button className="remove-btn" onClick={() => removeMessage(message)}>
             <CgTrashEmpty className="icon remove" />
           </button>
         )}
       </div>
-
-      <p className="datetime">
-        <TimeAgo date={message.createdAt} />
-      </p>
     </li>
   );
 }

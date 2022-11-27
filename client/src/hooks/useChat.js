@@ -38,6 +38,7 @@ export default function useChat() {
 
     // обрабатываем получение обновленного списка пользователей
     socket.on("user_list:update", (users) => {
+      console.log("users: ", users);
       setUsers(users);
     });
 

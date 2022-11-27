@@ -33,7 +33,7 @@ export default function MessageList({ log, messages, removeMessage }) {
 
   return (
     <div className="container message">
-      <h2>Messages</h2>
+      <h2 className="title">Messages</h2>
       <ul className="list message">
         {/* перебираем список и рендерим сообщения */}
         {messages.map((message) => (

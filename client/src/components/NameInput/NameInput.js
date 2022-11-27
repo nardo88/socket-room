@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { USER_KEY } from "../../constants";
 import storage from "../../utils/storage";
+import "./NameInput.scss";
 
 export const NameInput = () => {
   // начальные данные
@@ -46,11 +47,14 @@ export const NameInput = () => {
 
   return (
     <div className="container name-input">
-      <h2>Welcome</h2>
+      <h2 className="title">Welcome</h2>
       <form onSubmit={onSubmit} className="form name-room">
-        <div>
-          <label htmlFor="userName">Enter your name</label>
+        <div className="form__item">
+          <label htmlFor="userName" className="form__label">
+            Enter your name
+          </label>
           <input
+            className="form__input"
             type="text"
             id="userName"
             name="userName"
@@ -61,9 +65,12 @@ export const NameInput = () => {
           />
         </div>
         {/* скрываем поле для создания комнаты (возможность масштабирования) */}
-        <div class="visually-hidden">
-          <label htmlFor="roomId">Enter room ID</label>
+        <div className="form__item">
+          <label htmlFor="roomId" className="form__label">
+            Enter room ID
+          </label>
           <input
+            className="form__input"
             type="text"
             id="roomId"
             name="roomId"
@@ -73,7 +80,7 @@ export const NameInput = () => {
             onChange={onChange}
           />
         </div>
-        <button disabled={submitDisabled} className="btn chat">
+        <button disabled={submitDisabled} className="form__btn">
           Chat
         </button>
       </form>

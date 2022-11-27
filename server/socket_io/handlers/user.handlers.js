@@ -18,17 +18,25 @@ export default function userHandlers(io, socket) {
 
   // обрабатываем подключение нового пользователя
   socket.on("user:add", async (user) => {
-    // сообщаем другим пользователям об этом
-    socket.to(roomId).emit("log", `User ${userName} connected`);
+    // Проверяем если ли пользоватенль уже в комнате
+    const candidat = users[roomId].find((item) => item.userId === user.userId);
 
-    // записываем идентификатор сокета пользователя
-    user.socketId = socket.id;
+    if (!candidat) {
+      console.log("user: ", user);
+      console.log("users: ", users);
 
-    // записываем пользователя в хранилище
-    users[roomId].push(user);
+      // сообщаем другим пользователям об этом
+      socket.to(roomId).emit("log", `User ${userName} connected`);
 
-    // обновляем список пользователей
-    updateUserList();
+      // записываем идентификатор сокета пользователя
+      user.socketId = socket.id;
+
+      // записываем пользователя в хранилище
+      users[roomId].push(user);
+
+      // обновляем список пользователей
+      updateUserList();
+    }
   });
 
   // обрабатываем отключения пользователя
